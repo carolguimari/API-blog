@@ -222,6 +222,17 @@ const deletarPost = (id) => {
     return posts[i]
 }
 
+const buscarPostsAutor = (index) => {
+    let postsAutor = []
+
+    for (i = 0; i < posts.length; i++) {
+      if (posts[i].autor.id == index) {
+         postsAutor.push(posts[i])
+      }
+    }
+    return postsAutor
+    
+    }
 
 
 const contexto = async(ctx) => {
@@ -296,6 +307,10 @@ const contexto = async(ctx) => {
                 ctx.status = 400
                 ctx.body = 'Você precisa informar um identificador do post!'
             }
+        } else if (acao.substr(0,6) === 'posts?' && ctx.method === 'GET') {
+            let index = acao.substr(12) 
+            ctx.body = buscarPostsAutor(index)
+
         }
 
 
